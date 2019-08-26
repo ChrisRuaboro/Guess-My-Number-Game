@@ -25,7 +25,7 @@ namespace BisectionAlgorithm
             do
             {
                 valid = int.TryParse(Console.ReadLine(), out choice);
-                if (!valid || choice < 1 || choice > 2)
+                if (!valid || choice < 1 || choice > 3)
                 {
                     Console.WriteLine("Invalid input");
                     valid = false;
@@ -39,6 +39,48 @@ namespace BisectionAlgorithm
             {
                 computerGame();
             }
+            else if (choice == 3)
+            {
+                bisectionalAlgorithm();
+            }
+        }
+        static void bisectionalAlgorithm()
+        {
+
+            //if (randValue > middle)
+            //{
+            //    Console.WriteLine($"Value is higher than {middle}");
+            //    startingPoint = middle;
+            //    populateUpperHalf(out rangeOfNums);
+            //    middle = findMiddle(rangeOfNums[0], rangeOfNums[rangeOfNums.Count - 1]);
+            //    Console.WriteLine("Range Of Num is now");
+            //    foreach (var item in rangeOfNums)
+            //    {
+            //        Console.Write($"{item},");
+            //    }
+            //    Console.WriteLine($"\nMiddle is {middle}");
+            //}
+            //    else if (randValue < middle)
+            //    {
+            //        Console.WriteLine($"Value is lower than {middle}");
+            //        //populates lowerHalf
+            //        topValue = middle;
+            //        populateLowerHalf(out rangeOfNums);
+            //        middle = findMiddle(rangeOfNums[0], rangeOfNums[rangeOfNums.Count - 1]);
+            //        Console.WriteLine("Range Of Num is now");
+            //        foreach (var item in rangeOfNums)
+            //        {
+            //            Console.Write($"{item},");
+            //        }
+            //        Console.WriteLine($"\nMiddle is {middle}");
+            //    }
+            //} while (randValue != middle);
+            //if (randValue == middle)
+            //{
+            //    Console.WriteLine($"Computer chose {randValue}");
+            //    Console.WriteLine($"The value searched for, {randValue}, has been found ");
+            //    exitGame();
+            //}
         }
         static List<int> populateList(int topValue)
         {
@@ -157,40 +199,7 @@ namespace BisectionAlgorithm
                         break;
                 }
             } while (!valid);
-                //if (randValue > middle)
-                //{
-                //    Console.WriteLine($"Value is higher than {middle}");
-                //    startingPoint = middle;
-                //    populateUpperHalf(out rangeOfNums);
-                //    middle = findMiddle(rangeOfNums[0], rangeOfNums[rangeOfNums.Count - 1]);
-                //    Console.WriteLine("Range Of Num is now");
-                //    foreach (var item in rangeOfNums)
-                //    {
-                //        Console.Write($"{item},");
-                //    }
-                //    Console.WriteLine($"\nMiddle is {middle}");
-                //}
-                //    else if (randValue < middle)
-                //    {
-                //        Console.WriteLine($"Value is lower than {middle}");
-                //        //populates lowerHalf
-                //        topValue = middle;
-                //        populateLowerHalf(out rangeOfNums);
-                //        middle = findMiddle(rangeOfNums[0], rangeOfNums[rangeOfNums.Count - 1]);
-                //        Console.WriteLine("Range Of Num is now");
-                //        foreach (var item in rangeOfNums)
-                //        {
-                //            Console.Write($"{item},");
-                //        }
-                //        Console.WriteLine($"\nMiddle is {middle}");
-                //    }
-                //} while (randValue != middle);
-                //if (randValue == middle)
-                //{
-                //    Console.WriteLine($"Computer chose {randValue}");
-                //    Console.WriteLine($"The value searched for, {randValue}, has been found ");
-                //    exitGame();
-                //}
+                    
         }
 
         static int findMiddle(int startpoint, int endingpoint)
