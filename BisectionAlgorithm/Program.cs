@@ -46,7 +46,26 @@ namespace BisectionAlgorithm
         }
         static void bisectionalAlgorithm()
         {
-
+            //bool valid;
+            //bool userGuessedCorrectly;
+            //int userGuess;
+            //Console.WriteLine("What range do you want the computer to guess from?");
+            //Console.Write($"{startingPoint} through ");
+            //do
+            //{
+            //    valid = int.TryParse(Console.ReadLine(), out topValue);
+            //    if (!valid)
+            //    {
+            //        Console.WriteLine("Invalid input");
+            //    }
+            //    else if (topValue <= startingPoint)
+            //    {
+            //        Console.WriteLine($"Range must bigger than {startingPoint}");
+            //        valid = false;
+            //    }
+            //} while (!valid);
+            //List<int> rangeOfNums = populateList(topValue);
+            //int randValue = computerPicksRandom(rangeOfNums);
             //if (randValue > middle)
             //{
             //    Console.WriteLine($"Value is higher than {middle}");
