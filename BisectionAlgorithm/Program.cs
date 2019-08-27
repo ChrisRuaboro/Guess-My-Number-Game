@@ -21,7 +21,7 @@ namespace BisectionAlgorithm
             bool valid;
             int choice;
             Console.WriteLine("Who should guess the number?");
-            Console.WriteLine("1 : User or 2 : Computer");
+            Console.WriteLine("1 : User or 2 : Computer or 3 : Bisection Algorithm Demonstration");
             do
             {
                 valid = int.TryParse(Console.ReadLine(), out choice);
@@ -46,60 +46,60 @@ namespace BisectionAlgorithm
         }
         static void bisectionalAlgorithm()
         {
-            //bool valid;
-            //bool userGuessedCorrectly;
-            //int userGuess;
-            //Console.WriteLine("What range do you want the computer to guess from?");
-            //Console.Write($"{startingPoint} through ");
-            //do
-            //{
-            //    valid = int.TryParse(Console.ReadLine(), out topValue);
-            //    if (!valid)
-            //    {
-            //        Console.WriteLine("Invalid input");
-            //    }
-            //    else if (topValue <= startingPoint)
-            //    {
-            //        Console.WriteLine($"Range must bigger than {startingPoint}");
-            //        valid = false;
-            //    }
-            //} while (!valid);
-            //List<int> rangeOfNums = populateList(topValue);
-            //int randValue = computerPicksRandom(rangeOfNums);
-            //if (randValue > middle)
-            //{
-            //    Console.WriteLine($"Value is higher than {middle}");
-            //    startingPoint = middle;
-            //    populateUpperHalf(out rangeOfNums);
-            //    middle = findMiddle(rangeOfNums[0], rangeOfNums[rangeOfNums.Count - 1]);
-            //    Console.WriteLine("Range Of Num is now");
-            //    foreach (var item in rangeOfNums)
-            //    {
-            //        Console.Write($"{item},");
-            //    }
-            //    Console.WriteLine($"\nMiddle is {middle}");
-            //}
-            //    else if (randValue < middle)
-            //    {
-            //        Console.WriteLine($"Value is lower than {middle}");
-            //        //populates lowerHalf
-            //        topValue = middle;
-            //        populateLowerHalf(out rangeOfNums);
-            //        middle = findMiddle(rangeOfNums[0], rangeOfNums[rangeOfNums.Count - 1]);
-            //        Console.WriteLine("Range Of Num is now");
-            //        foreach (var item in rangeOfNums)
-            //        {
-            //            Console.Write($"{item},");
-            //        }
-            //        Console.WriteLine($"\nMiddle is {middle}");
-            //    }
-            //} while (randValue != middle);
-            //if (randValue == middle)
-            //{
-            //    Console.WriteLine($"Computer chose {randValue}");
-            //    Console.WriteLine($"The value searched for, {randValue}, has been found ");
-            //    exitGame();
-            //}
+            bool valid;
+            Console.WriteLine("What range do you want the computer to guess from?");
+            Console.Write($"{startingPoint} through ");
+            do
+            {
+                valid = int.TryParse(Console.ReadLine(), out topValue);
+                if (!valid)
+                {
+                    Console.WriteLine("Invalid input");
+                }
+                else if (topValue <= startingPoint)
+                {
+                    Console.WriteLine($"Range must bigger than {startingPoint}");
+                    valid = false;
+                }
+            } while (!valid);
+            List<int> rangeOfNums = populateList(topValue);
+            int randValue = computerPicksRandom(rangeOfNums);
+            middle = findMiddle(startingPoint, topValue);
+            do { 
+            if (randValue > middle)
+            {
+                Console.WriteLine($"Value is higher than {middle}");
+                startingPoint = middle;
+                populateUpperHalf(out rangeOfNums);
+                middle = findMiddle(rangeOfNums[0], rangeOfNums[rangeOfNums.Count - 1]);
+                Console.WriteLine("Range Of Num is now");
+                foreach (var item in rangeOfNums)
+                {
+                    Console.Write($"{item},");
+                }
+                Console.WriteLine($"\nMiddle is {middle}");
+            }
+            else if (randValue < middle)
+            {
+                Console.WriteLine($"Value is lower than {middle}");
+                //populates lowerHalf
+                topValue = middle;
+                populateLowerHalf(out rangeOfNums);
+                middle = findMiddle(rangeOfNums[0], rangeOfNums[rangeOfNums.Count - 1]);
+                Console.WriteLine("Range Of Num is now");
+                foreach (var item in rangeOfNums)
+                {
+                    Console.Write($"{item},");
+                }
+                Console.WriteLine($"\nMiddle is {middle}");
+            }
+            } while (randValue != middle);
+            if (randValue == middle)
+            {
+                Console.WriteLine($"Computer chose {randValue}");
+                Console.WriteLine($"The value searched for, {randValue}, has been found ");
+                exitGame();
+            }
         }
         static List<int> populateList(int topValue)
         {
