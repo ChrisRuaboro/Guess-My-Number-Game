@@ -7,9 +7,10 @@ namespace BisectionAlgorithm
 {
     class Program
     {
-        static int startingPoint = 1; //starting point
-        static int topValue = 100; //default values
-        static int middle;
+        private static int startingValue { get; set; } = 1;
+        private static int topValue { get; set; } = 100;
+        private static int middleValue { get; set; }
+
         static void Main(string[] args)
         {
             Console.WriteLine("Bisection Algorithm.Main()");
@@ -46,55 +47,57 @@ namespace BisectionAlgorithm
         }
         static void bisectionalAlgorithm()
         {
+            int top;
             bool valid;
             Console.WriteLine("What range do you want the computer to guess from?");
-            Console.Write($"{startingPoint} through ");
+            Console.Write($"{startingValue} through ");
             do
             {
-                valid = int.TryParse(Console.ReadLine(), out topValue);
+                valid = int.TryParse(Console.ReadLine(), out top);
                 if (!valid)
                 {
                     Console.WriteLine("Invalid input");
                 }
-                else if (topValue <= startingPoint)
+                else if (topValue <= startingValue)
                 {
-                    Console.WriteLine($"Range must bigger than {startingPoint}");
+                    Console.WriteLine($"Range must bigger than {startingValue}");
                     valid = false;
                 }
+                topValue = top;
             } while (!valid);
             List<int> rangeOfNums = populateList(topValue);
             int randValue = computerPicksRandom(rangeOfNums);
-            middle = findMiddle(startingPoint, topValue);
+            middleValue = findmiddleValue(startingValue, topValue);
             do { 
-            if (randValue > middle)
+            if (randValue > middleValue)
             {
-                Console.WriteLine($"Value is higher than {middle}");
-                startingPoint = middle;
+                Console.WriteLine($"Value is higher than {middleValue}");
+                startingValue = middleValue;
                 populateUpperHalf(out rangeOfNums);
-                middle = findMiddle(rangeOfNums[0], rangeOfNums[rangeOfNums.Count - 1]);
+                middleValue = findmiddleValue(rangeOfNums[0], rangeOfNums[rangeOfNums.Count - 1]);
                 Console.WriteLine("Range Of Num is now");
-                foreach (var item in rangeOfNums)
-                {
-                    Console.Write($"{item},");
-                }
-                Console.WriteLine($"\nMiddle is {middle}");
+                    foreach (var item in rangeOfNums)
+                    {
+                        Console.Write($"{item},");
+                    }
+                    Console.WriteLine($"\nmiddleValue is {middleValue}");
             }
-            else if (randValue < middle)
+            else if (randValue < middleValue)
             {
-                Console.WriteLine($"Value is lower than {middle}");
+                Console.WriteLine($"Value is lower than {middleValue}");
                 //populates lowerHalf
-                topValue = middle;
+                topValue = middleValue;
                 populateLowerHalf(out rangeOfNums);
-                middle = findMiddle(rangeOfNums[0], rangeOfNums[rangeOfNums.Count - 1]);
+                middleValue = findmiddleValue(rangeOfNums[0], rangeOfNums[rangeOfNums.Count - 1]);
                 Console.WriteLine("Range Of Num is now");
-                foreach (var item in rangeOfNums)
-                {
-                    Console.Write($"{item},");
-                }
-                Console.WriteLine($"\nMiddle is {middle}");
+                    foreach (var item in rangeOfNums)
+                    {
+                        Console.Write($"{item},");
+                    }
+                    Console.WriteLine($"\nmiddleValue is {middleValue}");
             }
-            } while (randValue != middle);
-            if (randValue == middle)
+            } while (randValue != middleValue);
+            if (randValue == middleValue)
             {
                 Console.WriteLine($"Computer chose {randValue}");
                 Console.WriteLine($"The value searched for, {randValue}, has been found ");
@@ -103,28 +106,30 @@ namespace BisectionAlgorithm
         }
         static List<int> populateList(int topValue)
         {
-            List<int> numberRange = Enumerable.Range(startingPoint, topValue).ToList();
+            List<int> numberRange = Enumerable.Range(startingValue, topValue).ToList();
             return numberRange;
         }
         static void humanGame()
         {
+            int top;
             bool valid;
             bool userGuessedCorrectly;
             int userGuess;
             Console.WriteLine("What range do you want the computer to guess from?");
-            Console.Write($"{startingPoint} through ");
+            Console.Write($"{startingValue} through ");
             do
             {
-                valid = int.TryParse(Console.ReadLine(), out topValue);
+                valid = int.TryParse(Console.ReadLine(), out top);
                 if (!valid)
                 {
                     Console.WriteLine("Invalid input");
                 }
-                else if (topValue <= startingPoint)
+                else if (topValue <= startingValue)
                 {
-                    Console.WriteLine($"Range must bigger than {startingPoint}");
+                    Console.WriteLine($"Range must bigger than {startingValue}");
                     valid = false;
                 }
+                topValue = top;
             } while (!valid);
             List<int> rangeOfNums = populateList(topValue);
             int randValue = computerPicksRandom(rangeOfNums);
@@ -163,7 +168,7 @@ namespace BisectionAlgorithm
         {
             int randomValue;
             Random r = new Random();
-            randomValue = rangeOfNums[r.Next(startingPoint, topValue)];
+            randomValue = rangeOfNums[r.Next(startingValue, topValue)];
 
             return randomValue;
 
@@ -173,21 +178,21 @@ namespace BisectionAlgorithm
             int userGuess;
             bool valid;
             List<int> rangeOfNums = populateList(topValue);
-            Console.WriteLine($"Choose a number between {startingPoint} and {topValue}");
+            Console.WriteLine($"Choose a number between {startingValue} and {topValue}");
             do
             {
                 valid = int.TryParse(Console.ReadLine(), out userGuess);
-                if (!valid || userGuess < startingPoint || userGuess > topValue)
+                if (!valid || userGuess < startingValue || userGuess > topValue)
                 {
                     Console.WriteLine("Invalid Input");
                     valid = false;
                 }
             } while (!valid);
             Console.WriteLine($"Computer will try to guess your number");
-            middle = findMiddle(rangeOfNums[0], rangeOfNums[rangeOfNums.Count - 1]);
+            middleValue = findmiddleValue(rangeOfNums[0], rangeOfNums[rangeOfNums.Count - 1]);
             do
             {
-                int computerguess = middle;
+                int computerguess = middleValue;
                 Console.WriteLine($"Computer guesses {computerguess}");
                 int result;
                 Console.WriteLine("1: Too high , 2: Too Low , 3: Correct Answer");
@@ -199,15 +204,15 @@ namespace BisectionAlgorithm
                 switch (result)
                 {
                     case 1:
-                        topValue = middle;
+                        topValue = middleValue;
                         populateLowerHalf(out rangeOfNums);
-                        middle = findMiddle(rangeOfNums[0], rangeOfNums[rangeOfNums.Count - 1]);
+                        middleValue = findmiddleValue(rangeOfNums[0], rangeOfNums[rangeOfNums.Count - 1]);
                         valid = false;
                         break;
                     case 2:                        
-                        startingPoint = middle;
+                        startingValue = middleValue;
                         populateUpperHalf(out rangeOfNums);
-                        middle = findMiddle(rangeOfNums[0], rangeOfNums[rangeOfNums.Count - 1]);
+                        middleValue = findmiddleValue(rangeOfNums[0], rangeOfNums[rangeOfNums.Count - 1]);
                         valid = false;
                         break;
                     case 3:
@@ -221,16 +226,16 @@ namespace BisectionAlgorithm
                     
         }
 
-        static int findMiddle(int startpoint, int endingpoint)
+        static int findmiddleValue(int startpoint, int endingpoint)
         {
-            middle = (startpoint+endingpoint) / 2;
-            return middle;
+            middleValue = (startpoint+endingpoint) / 2;
+            return middleValue;
         }
 
         static void populateUpperHalf(out List<int> rangeOfNums)
         {
             List<int> newRangeOfNums = new List<int>();
-            for (int i = middle + 1; i <= topValue; i++)
+            for (int i = middleValue + 1; i <= topValue; i++)
             {
                 newRangeOfNums.Add(i);
             }
@@ -240,7 +245,7 @@ namespace BisectionAlgorithm
         static void populateLowerHalf(out List<int> rangeOfNums)
         {
             List<int> newRangeOfNums = new List<int>();
-            for (int i = startingPoint; i < middle; i++)
+            for (int i = startingValue; i < middleValue; i++)
             {
                 newRangeOfNums.Add(i);
             }
